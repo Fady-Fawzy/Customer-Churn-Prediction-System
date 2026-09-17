@@ -34,6 +34,12 @@ const batchResult =
 const downloadButton =
     document.getElementById("download-button");
 
+const batchSummary =
+    document.getElementById("batch-summary");
+
+const batchTableBody =
+    document.getElementById("batch-table-body");
+
 
 // هنخزن فيه لينك الملف المؤقت
 let downloadURL = null;
@@ -360,38 +366,31 @@ batchPredictButton.addEventListener(
             }
 
 
-            // API returns CSV, not JSON
-            const csvBlob =
-                await response.blob();
+            // API returns CSV
+            const csvText =
+                await response.text();
 
+            // Render Results into Table
+            renderBatchResults(csvText);
+
+            // Create blob for download button
+            const csvBlob = new Blob([csvText], {
+                type: "text/csv"
+            });
 
             // Remove old temporary URL
             if (downloadURL) {
-
-                URL.revokeObjectURL(
-                    downloadURL
-                );
-
+                URL.revokeObjectURL(downloadURL);
             }
 
-
             // Create temporary browser URL
-            downloadURL =
-                URL.createObjectURL(
-                    csvBlob
-                );
-
+            downloadURL = URL.createObjectURL(csvBlob);
 
             // Give the download button the file URL
-            downloadButton.href =
-                downloadURL;
-
+            downloadButton.href = downloadURL;
 
             // Show result section
-            batchResult.classList.remove(
-                "hidden"
-            );
-
+            batchResult.classList.remove("hidden");
 
         } catch (error) {
 
@@ -400,7 +399,6 @@ batchPredictButton.addEventListener(
             alert(
                 "Couldn't complete the batch prediction."
             );
-
 
         } finally {
 
@@ -413,3 +411,108 @@ batchPredictButton.addEventListener(
 
     }
 );
+
+
+// =========================
+// Helper: Parse CSV & Render Table
+// =========================
+
+function parseCSVLine(line) {
+    const values = [];
+    let cur = "";
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === "," && !inQuotes) {
+            values.push(cur.trim());
+            cur = "";
+        } else {
+            cur += char;
+        }
+    }
+    values.push(cur.trim());
+    return values;
+}
+
+function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) {
+        return { headers: [], rows: [] };
+    }
+
+    const headers = parseCSVLine(lines[0]);
+    const rows = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line) {
+            rows.push(parseCSVLine(line));
+        }
+    }
+
+    return { headers, rows };
+}
+
+function renderBatchResults(csvText) {
+    if (!batchTableBody) return;
+
+    const { headers, rows } = parseCSV(csvText);
+
+    if (rows.length === 0) {
+        batchTableBody.innerHTML =
+            '<tr><td colspan="4" style="text-align:center; padding: 20px;">No records found.</td></tr>';
+        return;
+    }
+
+    const lowerHeaders = headers.map(h => h.trim().toLowerCase());
+
+    let idCol = lowerHeaders.indexOf("customerid");
+    if (idCol === -1) idCol = lowerHeaders.indexOf("id");
+    if (idCol === -1) idCol = 0;
+
+    const predCol = lowerHeaders.indexOf("prediction");
+    const probCol = lowerHeaders.indexOf("probability");
+    const riskCol = lowerHeaders.indexOf("risk_level");
+
+    let churnCount = 0;
+    let rowsHtml = "";
+
+    rows.forEach((row, idx) => {
+        const custId = (idCol !== -1 && row[idCol]) ? row[idCol] : `#${idx + 1}`;
+        const pred = predCol !== -1 ? row[predCol] : "-";
+        const probRaw = probCol !== -1 ? parseFloat(row[probCol]) : NaN;
+        const probDisplay = !isNaN(probRaw) ? (probRaw * 100).toFixed(1) + "%" : (row[probCol] || "-");
+        const risk = riskCol !== -1 ? row[riskCol] : "-";
+
+        const isChurn = pred.toLowerCase() === "churn" || pred.toLowerCase() === "yes";
+        if (isChurn) churnCount++;
+
+        const predBadgeClass = isChurn ? "badge-churn" : "badge-nochurn";
+        const riskLower = risk.toLowerCase();
+        const riskBadgeClass =
+            riskLower === "high"
+                ? "badge-risk-high"
+                : riskLower === "medium"
+                ? "badge-risk-medium"
+                : "badge-risk-low";
+
+        rowsHtml += `
+            <tr>
+                <td class="cell-id"><strong>${custId}</strong></td>
+                <td><span class="badge ${predBadgeClass}">${pred}</span></td>
+                <td>${probDisplay}</td>
+                <td><span class="badge ${riskBadgeClass}">${risk}</span></td>
+            </tr>
+        `;
+    });
+
+    batchTableBody.innerHTML = rowsHtml;
+
+    if (batchSummary) {
+        batchSummary.textContent =
+            `Processed ${rows.length} customers (${churnCount} churn, ${rows.length - churnCount} retained). You can review all rows below or download the CSV.`;
+    }
+}

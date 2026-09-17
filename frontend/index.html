@@ -554,19 +554,39 @@
                     Prediction Complete ✓
                 </h2>
 
-                <p>
+                <p id="batch-summary">
                     Your predictions are ready.
                 </p>
 
-                <a
-                    class="download-button"
-                    id="download-button"
-                    download="predictions.csv"
-                >
-                    Download Results CSV
-                </a>
+                <!-- Results Table Container -->
+                <div class="table-container">
+                    <table class="results-table" id="batch-results-table">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Prediction</th>
+                                <th>Probability</th>
+                                <th>Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-table-body">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="batch-actions">
+                    <a
+                        class="download-button"
+                        id="download-button"
+                        download="predictions.csv"
+                    >
+                        Download Results CSV
+                    </a>
+                </div>
 
             </div>
+
 
 
         </section>
