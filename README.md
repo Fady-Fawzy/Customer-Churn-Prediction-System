@@ -18,43 +18,6 @@
 
 The entire data preparation and model inference flow is encapsulated within a single unified scikit-learn `Pipeline` to prevent data leakage and ensure seamless production serving via FastAPI.
 
-```mermaid
-flowchart TD
-    RAW["📁 RAW DATA"]
-
-    RAW --> TC["TotalCharges"]
-    RAW --> NUM["tenure, MonthlyCharges"]
-    RAW --> CAT["Categorical Features"]
-
-    subgraph PREP ["⚙️ PREPROCESSOR (ColumnTransformer)"]
-        direction TB
-        TC --> IMP["SimpleImputer<br/>(fill_value = 0)"]
-        IMP --> SC1["MinMaxScaler"]
-        NUM --> SC2["MinMaxScaler"]
-        CAT --> OHE["OneHotEncoder<br/>(handle_unknown = 'ignore')"]
-    end
-
-    SC1 --> SEN
-    SC2 --> SEN
-    OHE --> SEN
-    SEN["+ SeniorCitizen (passthrough)"] --> PIPE
-
-    subgraph TUNING [" MODEL TUNING & SELECTION"]
-        direction TB
-        PIPE["INITIAL PIPELINE<br/>Logistic Regression<br/>(class_weight = 'balanced')"]
-        PIPE --> GS["GridSearchCV<br/>• model__C = 0.1<br/>• model__solver = 'liblinear'<br/>• model__max_iter = 100"]
-        GS --> BEST["Best Estimator"]
-    end
-
-    BEST --> FINAL[" FINAL MODEL<br/>(Decision Threshold)<br/>threshold = 0.62"]
-```
-
-<details open>
-<summary><b> Architecture Flowchart (Text / Box View)</b></summary>
-
-```text
-Customer Churn Prediction Pipeline
-==================================
 
                             ┌───────────────────┐
                             │     RAW DATA      │
