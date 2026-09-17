@@ -3,6 +3,8 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import StreamingResponse
+from io import StringIO
 
 model = joblib.load("./models/churn_pipeline.pkl")
 THRESHOLD = 0.62
@@ -102,3 +104,8 @@ def predict_batch(file: UploadFile = File(...)):
     )
 
 
+app.mount(
+    "/",
+    StaticFiles(directory="frontend", html=True),
+    name="frontend"
+)

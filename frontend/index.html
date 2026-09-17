@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Churn Prediction</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+
+            <h1>Welcome 🫶</h1>
+
+            <p class="subtitle">
+                Which type do you want to predict now?
+            </p>
+
+            <div class="prediction-options">
+
+                <button class="option-card" id="single-option">
+                    <h2>Single Customer</h2>
+                    <p>Predict churn for one customer</p>
+                </button>
+
+                <button class="option-card" id="batch-option">
+                    <h2>Whole CSV</h2>
+                    <p>Upload a file and predict multiple customers</p>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Single Customer Section -->
+        <section class="single-section hidden" id="single-section">
+
+            <button class="back-button" id="back-from-single">
+                ← Back
+            </button>
+
+            <h1>Single Customer Prediction</h1>
+
+            <p class="subtitle">
+                Enter the customer's information below.
+            </p>
+
+
+            <!-- Personal Information -->
+            <div class="form-card">
+
+                <h2>Personal Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="gender">
+                            Gender
+                        </label>
+
+                        <select id="gender" name="gender">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="seniorCitizen">
+                            Senior Citizen
+                        </label>
+
+                        <select id="seniorCitizen" name="SeniorCitizen">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="partner">
+                            Partner
+                        </label>
+
+                        <select id="partner" name="Partner">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="dependents">
+                            Dependents
+                        </label>
+
+                        <select id="dependents" name="Dependents">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Services Information -->
+            <div class="form-card">
+
+                <h2>Services Information</h2>
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="phoneService">
+                            Phone Service
+                        </label>
+
+                        <select id="phoneService" name="PhoneService">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="multipleLines">
+                            Multiple Lines
+                        </label>
+
+                        <select id="multipleLines" name="MultipleLines">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No phone service">
+                                No phone service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="internetService">
+                            Internet Service
+                        </label>
+
+                        <select id="internetService" name="InternetService">
+                            <option value="DSL">DSL</option>
+                            <option value="Fiber optic">Fiber optic</option>
+                            <option value="No">No</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="onlineSecurity">
+                            Online Security
+                        </label>
+
+                        <select id="onlineSecurity" name="OnlineSecurity">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="onlineBackup">
+                            Online Backup
+                        </label>
+
+                        <select id="onlineBackup" name="OnlineBackup">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="deviceProtection">
+                            Device Protection
+                        </label>
+
+                        <select id="deviceProtection" name="DeviceProtection">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="techSupport">
+                            Tech Support
+                        </label>
+
+                        <select id="techSupport" name="TechSupport">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="streamingTV">
+                            Streaming TV
+                        </label>
+
+                        <select id="streamingTV" name="StreamingTV">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="streamingMovies">
+                            Streaming Movies
+                        </label>
+
+                        <select id="streamingMovies" name="StreamingMovies">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- Account & Billing -->
+            <div class="form-card">
+
+                <h2>Account & Billing</h2>
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="contract">
+                            Contract
+                        </label>
+
+                        <select id="contract" name="Contract">
+                            <option value="Month-to-month">
+                                Month-to-month
+                            </option>
+                            <option value="One year">
+                                One year
+                            </option>
+                            <option value="Two year">
+                                Two year
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="paperlessBilling">
+                            Paperless Billing
+                        </label>
+
+                        <select id="paperlessBilling" name="PaperlessBilling">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="paymentMethod">
+                            Payment Method
+                        </label>
+
+                        <select id="paymentMethod" name="PaymentMethod">
+
+                            <option value="Electronic check">
+                                Electronic check
+                            </option>
+
+                            <option value="Mailed check">
+                                Mailed check
+                            </option>
+
+                            <option value="Bank transfer (automatic)">
+                                Bank transfer (automatic)
+                            </option>
+
+                            <option value="Credit card (automatic)">
+                                Credit card (automatic)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="tenure">
+                            Tenure
+                        </label>
+
+                        <input
+                            type="number"
+                            id="tenure"
+                            name="tenure"
+                            min="0"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="monthlyCharges">
+                            Monthly Charges
+                        </label>
+
+                        <input
+                            type="number"
+                            id="monthlyCharges"
+                            name="MonthlyCharges"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="totalCharges">
+                            Total Charges
+                        </label>
+
+                        <input
+                            type="number"
+                            id="totalCharges"
+                            name="TotalCharges"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- Single Predict Button -->
+            <button
+                class="predict-button"
+                id="predict-button"
+            >
+                Predict Customer
+            </button>
+
+
+            <!-- Single Result -->
+            <div
+                class="result-card hidden"
+                id="result-card"
+            >
+
+                <h2>
+                    Prediction Result
+                </h2>
+
+                <div class="result-item">
+                    <span>Prediction</span>
+                    <strong id="result-prediction">
+                        -
+                    </strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Probability</span>
+                    <strong id="result-probability">
+                        -
+                    </strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Risk Level</span>
+                    <strong id="result-risk">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Whole CSV Section -->
+        <section
+            class="batch-section hidden"
+            id="batch-section"
+        >
+
+            <button
+                class="back-button"
+                id="back-from-batch"
+            >
+                ← Back
+            </button>
+
+            <h1>
+                Whole CSV Prediction
+            </h1>
+
+            <p class="subtitle">
+                Upload a CSV file containing customer data.
+            </p>
+
+
+            <!-- Upload Card -->
+            <div class="upload-card">
+
+
+                <!-- Custom Upload Area -->
+                <label
+                    for="csv-file"
+                    class="upload-area"
+                >
+
+                    <span class="upload-icon">
+                        ↑
+                    </span>
+
+                    <h2>
+                        Choose your CSV file
+                    </h2>
+
+                    <p>
+                        Only .csv files are accepted
+                    </p>
+
+                </label>
+
+
+                <!-- Real File Input -->
+                <input
+                    type="file"
+                    id="csv-file"
+                    accept=".csv,text/csv"
+                    hidden
+                >
+
+
+                <!-- Selected File Information -->
+                <div
+                    class="file-info hidden"
+                    id="file-info"
+                >
+
+                    <span>
+                        Selected File:
+                    </span>
+
+                    <strong id="file-name">
+                    </strong>
+
+                </div>
+
+
+                <!-- Batch Prediction Button -->
+                <button
+                    class="predict-button"
+                    id="batch-predict-button"
+                    disabled
+                >
+                    Run Batch Prediction
+                </button>
+
+
+            </div>
+
+
+            <!-- Batch Result -->
+            <div
+                class="batch-result hidden"
+                id="batch-result"
+            >
+
+                <h2>
+                    Prediction Complete ✓
+                </h2>
+
+                <p>
+                    Your predictions are ready.
+                </p>
+
+                <a
+                    class="download-button"
+                    id="download-button"
+                    download="predictions.csv"
+                >
+                    Download Results CSV
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

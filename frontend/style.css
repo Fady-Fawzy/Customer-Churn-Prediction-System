@@ -1,0 +1,545 @@
+/* =========================
+   Global Reset
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================
+   Body
+========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f7f9;
+    color: #1f2937;
+}
+
+
+/* =========================
+   Main Container
+========================= */
+
+.container {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================
+   Welcome Section
+========================= */
+
+.welcome-section {
+    width: 100%;
+    max-width: 850px;
+
+    text-align: center;
+}
+
+
+.welcome-section h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+
+.subtitle {
+    color: #6b7280;
+    font-size: 18px;
+
+    margin-bottom: 40px;
+}
+
+
+/* =========================
+   Prediction Options
+========================= */
+
+.prediction-options {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+.option-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    padding: 35px 25px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s;
+}
+
+
+.option-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #9ca3af;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+.option-card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+
+.option-card p {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+
+/* =========================
+   Single Customer Section
+========================= */
+
+.single-section {
+    width: 100%;
+    max-width: 850px;
+}
+
+
+/* =========================
+   Form Cards
+========================= */
+
+.form-card {
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    padding: 28px;
+
+    margin-top: 30px;
+
+    text-align: left;
+}
+
+
+.form-card h2 {
+    font-size: 20px;
+
+    margin-bottom: 24px;
+}
+
+
+/* =========================
+   Form Grid
+========================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================
+   Form Group
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.form-group select,
+.form-group input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 2px solid #d1d5db;
+    border-radius: 13px;
+
+    background-color: white;
+
+    font-size: 14px;
+}
+
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+
+    border-color: #6b7280;
+}
+
+
+/* =========================
+   Predict Button
+========================= */
+
+.predict-button {
+    display: block;
+
+    width: 220px;
+
+    margin: 25px auto 0;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #1f2937;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.predict-button:hover {
+    background-color: #374151;
+}
+
+
+.predict-button:disabled {
+    background-color: #9ca3af;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   Prediction Result
+========================= */
+
+.result-card {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+
+.result-card h2 {
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+
+.result-item {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================
+   Back Button
+========================= */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 24px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background-color: white;
+    color: #374151;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.back-button:hover {
+    background-color: #f3f4f6;
+
+    border-color: #9ca3af;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================
+   Batch CSV Section
+========================= */
+
+.batch-section {
+    width: 100%;
+    max-width: 850px;
+}
+
+
+/* =========================
+   Upload Card
+========================= */
+
+.upload-card {
+    margin-top: 30px;
+
+    padding: 30px;
+
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+
+/* =========================
+   Upload Area
+========================= */
+
+.upload-area {
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.upload-area:hover {
+    background-color: #f9fafb;
+
+    border-color: #9ca3af;
+}
+
+
+.upload-icon {
+    font-size: 34px;
+
+    margin-bottom: 12px;
+}
+
+
+.upload-area h2 {
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.upload-area p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   Selected File
+========================= */
+
+.file-info {
+    margin-top: 20px;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    background-color: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+
+.file-info strong {
+    word-break: break-word;
+}
+
+
+/* =========================
+   Batch Result
+========================= */
+
+.batch-result {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+
+.batch-result h2 {
+    margin-bottom: 10px;
+}
+
+
+.batch-result p {
+    color: #6b7280;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   Download Button
+========================= */
+
+.download-button {
+    display: inline-block;
+
+    padding: 12px 18px;
+
+    background-color: #1f2937;
+    color: white;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.download-button:hover {
+    background-color: #374151;
+}
+
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 650px) {
+
+    .prediction-options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .welcome-section h1 {
+        font-size: 34px;
+    }
+
+
+    .upload-card {
+        padding: 20px;
+    }
+
+
+    .upload-area {
+        min-height: 190px;
+    }
+
+
+    .file-info {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 6px;
+    }
+
+
+    .predict-button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================
+   Hidden Elements
+========================= */
+
+.hidden {
+    display: none;
+}
