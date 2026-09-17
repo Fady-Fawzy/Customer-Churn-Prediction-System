@@ -1,4 +1,4 @@
-# 📊 Customer Churn Prediction System
+#  Customer Churn Prediction System
 
 <p align="center">
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [1-EDA Findings](#1-eda-findings)
 - [2-ML Pipeline & Architecture](#2-ml-pipeline--architecture)
@@ -22,9 +22,8 @@
 - [4-Why Logistic Regression Was Selected](#4-why-logistic-regression-was-selected)
 - [5-Production Training Pipeline](#5-production-training-pipeline-trainpy)
 - [6-Model Verification](#6-model-verification-predictpy)
-- [FastAPI Backend & Endpoints](#-fastapi-backend--endpoints-mainpy)
-- [How to Run](#️-how-to-run)
-
+- [7-FastAPI Backend & Endpoints](#7-fastapi-backend--endpoints-mainpy)
+- [8-How to Run](#8-how-to-run)
 ---
 
 ## 1-EDA Findings
@@ -154,7 +153,7 @@ Three baseline models were evaluated on the validation set using a stratified sp
 
 ---
 
-## 🚀 FastAPI Backend & Endpoints (`main.py`)
+## 7-FastAPI Backend & Endpoints (`main.py`)
 
 - **Model Initialization & Thresholding:** Loads `churn_pipeline.pkl` globally once upon startup and enforces the optimized decision threshold of `0.62`[cite: 1, 6].
 - **`GET /health`:** Health check endpoint to verify server readiness and confirm the pipeline artifact is loaded in memory[cite: 1, 6].
@@ -166,7 +165,7 @@ Three baseline models were evaluated on the validation set using a stratified sp
 
 ---
 
-## ⚙️ How to Run
+## 8-How to Run
 
 ### 1. Clone the Repository
 
